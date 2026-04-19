@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="AutoContracts">
+            <HintPath>lib\AutoContracts.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <Target Name="DeployPlugin" AfterTargets="Build">
+        <PropertyGroup>
+            <PluginDir>$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))/.config/auto/plugins/$(AssemblyName)</PluginDir>
+        </PropertyGroup>
+        <MakeDir Directories="$(PluginDir)" />
+        <Copy SourceFiles="$(TargetDir)$(TargetFileName);$(TargetDir)plugin.json" DestinationFolder="$(PluginDir)" />
+    </Target>
+
+    <ItemGroup>
+        <None Update="plugin.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>
