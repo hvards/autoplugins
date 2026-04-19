@@ -6,6 +6,7 @@ Plugins for [Auto](https://github.com/hvards/auto).
 
 | Plugin | Description |
 |---|---|
+| **CloseWindow** | Close a window by handle or process name. |
 | **FocusWindow** | Focus a window by handle or process name. |
 | **WindowKeys** | Get window handle by typing label. |
 
