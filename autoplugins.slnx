@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="FocusWindow/FocusWindow.csproj" />
+  <Project Path="WindowKeys/WindowKeys.csproj" />
+  <Project Path="WindowKeysTests/WindowKeysTests.csproj" />
 </Solution>
