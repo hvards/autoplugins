@@ -1,20 +1,17 @@
-﻿using WindowKeys.Forms;
-using WindowKeys.Native;
-
 namespace WindowKeys;
 
-public class Window
+internal class Window
 {
-	public nint Handle { get; set; } = nint.Zero;
-	public RECT Rect { get; set; }
-	public string ActivationString { get; set; } = string.Empty;
-	public OverlayForm? OverlayForm { get; set; }
-	public bool Dismissed { get; set; }
-	public nint InsertAfter { get; set; } = nint.Zero;
+    public required nint Handle { get; init; }
+    public required Native.RECT Rect { get; init; }
+    public required nint InsertAfter { get; init; }
+    public string ActivationString { get; set; } = string.Empty;
+    public OverlayForm? OverlayForm { get; set; }
+    public bool Dismissed { get; private set; }
 
-	public void DismissOverlay()
-	{
-		OverlayForm?.Hide();
-		Dismissed = true;
-	}
+    public void DismissOverlay()
+    {
+        OverlayForm?.Hide();
+        Dismissed = true;
+    }
 }

@@ -1,41 +1,30 @@
-﻿using Microsoft.Extensions.Options;
-using WindowKeys.Interfaces;
-using WindowKeys.Settings;
-
 namespace WindowKeys;
 
-public class CombinationGenerator(IOptions<ActivationSettings> options) : ICombinationGenerator
+internal static class CombinationGenerator
 {
-	private readonly ActivationSettings _options = options.Value;
+    public static List<string> Generate(int count, char[] letters)
+    {
+        if (count == 0) return [];
+        var length = Math.Max(1, (int)Math.Ceiling(Math.Log(count) / Math.Log(letters.Length)));
 
-	private char[] Letters => _options.SelectionKeys.Length > 1
-		? _options.SelectionKeys
-		: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
+        var current = new char[length];
+        var results = new List<string>();
+        Fill(current, 0, results, count, letters);
+        return results;
+    }
 
-	public List<string> GetCombinations(int count)
-	{
-		if (count == 0) return [];
-		var length = (int)Math.Ceiling(Math.Log(count) / Math.Log(Letters.Length));
-
-		var result = new char[length];
-		var results = new List<string>();
-		Combinations(result, 0, results, count);
-		return results;
-	}
-
-	private void Combinations(char[] current, int position, ICollection<string> results, int desiredCount)
-	{
-		if (results.Count == desiredCount) return;
-		if (position == current.Length)
-		{
-			results.Add(new string(current));
-			return;
-		}
-
-		foreach (var l in Letters)
-		{
-			current[position] = l;
-			Combinations(current, position + 1, results, desiredCount);
-		}
-	}
+    private static void Fill(char[] current, int position, ICollection<string> results, int desired, char[] letters)
+    {
+        if (results.Count == desired) return;
+        if (position == current.Length)
+        {
+            results.Add(new string(current));
+            return;
+        }
+        foreach (var l in letters)
+        {
+            current[position] = l;
+            Fill(current, position + 1, results, desired, letters);
+        }
+    }
 }
