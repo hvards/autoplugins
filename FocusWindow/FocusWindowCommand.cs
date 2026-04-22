@@ -26,7 +26,9 @@ internal partial class FocusWindowCommand : ICommand
 
 	public object? Execute(object?[] args)
 	{
-		var input = (string)(args[0] ?? string.Empty);
+		if (args.Length == 0 || args[0] is not string input || string.IsNullOrWhiteSpace(input))
+			return false;
+
 		var handle = ResolveHandle(input);
 		if (handle == nint.Zero || !IsWindow(handle))
 			return false;

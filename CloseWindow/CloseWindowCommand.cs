@@ -31,8 +31,10 @@ internal partial class CloseWindowCommand : ICommand
 
 	public object? Execute(object?[] args)
 	{
-		var input = (string)(args[0] ?? string.Empty);
-		var force = (bool)(args[1] ?? false);
+		if (args.Length == 0 || args[0] is not string input || string.IsNullOrWhiteSpace(input))
+			return false;
+
+		var force = args.Length > 1 && args[1] is bool b && b;
 
 		var handle = ResolveHandle(input);
 		if (handle == nint.Zero || !IsWindow(handle))
