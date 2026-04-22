@@ -1,4 +1,5 @@
 using System.Drawing;
+
 using WindowKeys;
 
 namespace WindowKeysTests;
