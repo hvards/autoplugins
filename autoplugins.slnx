@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="CloseWindow/CloseWindow.csproj" />
   <Project Path="FocusWindow/FocusWindow.csproj" />
+  <Project Path="PinWindow/PinWindow.csproj" />
   <Project Path="WindowKeys/WindowKeys.csproj" />
   <Project Path="WindowKeysTests/WindowKeysTests.csproj" />
 </Solution>
